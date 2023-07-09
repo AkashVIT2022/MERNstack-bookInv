@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import Publisher_form from './Publisher_form';
 const Alert = () => {
     const [data,setdata]=useState(null);
     const [data1,setdata1]=useState(null);
@@ -145,7 +146,8 @@ const Alert = () => {
         {content==0 && <center className='no-alert'><div>No Pending Shipments!!!</div></center>}
     </div>}
     {active ==1 &&<div id='alert'>
-        {<center className='no-alert'><div>This is for form</div></center>}
+        <Publisher_form/>
+        {/* {<center className='no-alert'><div>This is for form</div></center>} */}
     </div>}
     {active ==2 &&<div id='alert'>
         {
