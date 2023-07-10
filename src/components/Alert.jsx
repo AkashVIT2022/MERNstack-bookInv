@@ -119,19 +119,19 @@ const Alert = () => {
  return (
     <>
     <center id='button'>
-        <span className={active==0?'active':'nonactive'} onClick={()=>{setactive(0);window.localStorage.setItem('active',0);}}>Publisher</span>
-        <span className={active==1?'active':'nonactive'} onClick={()=>{setactive(1);window.localStorage.setItem('active',1);}}>Dealer</span>
-        <span className={active==2?'active':'nonactive'} onClick={()=>{setactive(2);window.localStorage.setItem('active',2);}}>Action</span>
+        <span className={active==0?'active':'nonactive'} onClick={()=>{setactive(0);window.localStorage.setItem('active',0);window.location.reload()}}>Publisher</span>
+        <span className={active==1?'active':'nonactive'} onClick={()=>{setactive(1);window.localStorage.setItem('active',1);window.location.reload()}}>Dealer</span>
+        <span className={active==2?'active':'nonactive'} onClick={()=>{setactive(2);window.localStorage.setItem('active',2);window.location.reload()}}>Action</span>
     </center>
     {active ==0 &&<div id='alert'>
         {
             data && data.map((ele,index)=>{
                 return(<>
                 {ele.stat=='pending' && <div className="box">
-                    <div>Name: abc publishers</div>
-                    <div>adrress: abc street</div>
-                    <div>id: znind21</div>
-                    <div>Estimated arrival: 30/10/12</div>
+                <div>Name: {ele.pub_name}</div>
+                    <div>adrress: {ele.address}</div>
+                    <div>id: {ele.pub_id}</div>
+                    <div>Estimated arrival: {ele.ETD}</div>
                 {<div>Shipment amount: 
                     {
                         ele.books.reduce((total, val) => total + val.quantity * val.price, 0)
@@ -151,10 +151,10 @@ const Alert = () => {
             data1 && data1.map((ele,index)=>{
                 return(<>
                 {ele.stat=='pending' && <div className="box">
-                    <div>Name: abc publishers</div>
-                    <div>adrress: abc street</div>
-                    <div>id: znind21</div>
-                    <div>Estimated arrival: 30/10/12</div>
+                <div>Name: {ele.dealer_name}</div>
+                    <div>adrress: {ele.address}</div>
+                    <div>id: {ele.dealer_id}</div>
+                    <div>Estimated arrival: {ele.ETA}</div>
                     <div></div>
                     <button onClick={()=>setstatus1(ele,'accepted')}><i class="fa-solid fa-check"></i></button>
                     <button onClick={()=>setstatus1(ele,'declined')}><i class="fa-solid fa-xmark"></i></button>
@@ -171,10 +171,10 @@ const Alert = () => {
             data &&data.map((ele,index)=>{
                 return(<>
                 {ele.stat!='pending' && <div className="box">
-                    <div>Name: abc publishers</div>
-                    <div>adrress: abc street</div>
-                    <div>id: znind21</div>
-                    <div>Estimated arrival: 30/10/12</div>
+                    <div>Name: {ele.pub_name}</div>
+                    <div>adrress: {ele.address}</div>
+                    <div>id: {ele.pub_id}</div>
+                    <div>Estimated arrival: {ele.ETD}</div>
                 {<div>Shipment amount: 
                     {
                         ele.books.reduce((total, val) => total + val.quantity * val.price, 0)
@@ -186,15 +186,15 @@ const Alert = () => {
             })
         }
         {data && content==data.length && <center><div id='no-alert'>No actions yet for publisher!!!</div></center>}
-        <hr id='line' />
+        <hr id='lines' />
         {
             data1 &&data1.map((ele,index)=>{
                 return(<>
                 {ele.stat!='pending' && <div className="box">
-                    <div>Name: abc publishers</div>
-                    <div>adrress: abc street</div>
-                    <div>id: znind21</div>
-                    <div>Estimated arrival: 30/10/12</div>
+                <div>Name: {ele.dealer_name}</div>
+                    <div>adrress: {ele.address}</div>
+                    <div>id: {ele.dealer_id}</div>
+                    <div>Estimated arrival: {ele.ETA}</div>
                     <div></div>
                     <button style={{color:ele.stat=='declined'?'red':''}} onMouseOut={(e)=>removecolor(ele.stat,e)} onMouseOver={(e)=>setcolor(ele.stat,e)} onClick={()=>setview1(index)}><i class="fa-regular fa-eye"></i></button>
                 </div>}

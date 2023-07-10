@@ -19,6 +19,7 @@ const Heading = ({set}) => {
     document.cookie = "id="+user+"; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
     setuser(null);
     window.localStorage.setItem('auth','false');
+    window.localStorage.setItem('active',0);
     navigate('/publisher_login');
   }
   return (
@@ -29,7 +30,7 @@ const Heading = ({set}) => {
    {
     window.location.pathname!=='/publisher_login'? 
     <div id='cont'>
-      <button onClick={()=>{logout();set('publisher_login')}}>Logout</button>
+      <button id='logout' onClick={()=>{logout();set('publisher_login')}}>Logout</button>
       {window.localStorage.getItem('auth')=='true' &&(user!==null?<div>username: {user}</div>:window.location.reload())}
     </div>
     :<></>

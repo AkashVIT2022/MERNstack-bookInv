@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import Publisher_form from './Publisher_form';
+import { AuthContext } from '../context/AuthContext';
 const Alert = () => {
-    const [data,setdata]=useState(null);
+    const [data0,setdata0]=useState(null);
     const [data1,setdata1]=useState(null);
     const [viewdata,setviewdata]=useState(null);
     const [viewdata1,setviewdata1]=useState(null);
@@ -14,7 +15,7 @@ const Alert = () => {
         .then((res)=>{
             console.log(res.data);
             // settotal(count);
-            setdata(res.data);
+            setdata0(res.data);
         })
         .catch((err)=>console.log(err));
         axios.get('http://localhost:3001/dealer_request')
@@ -30,7 +31,7 @@ const Alert = () => {
     const setview=(i)=>{
         // e.preventDefault();
         console.log(i);
-        setviewdata(data[i]);
+        setviewdata(data0[i]);
         document.getElementById('view').style.display='block';
         document.getElementById('alert').style.opacity='0.3';
         document.getElementById('alert').style.pointerEvents='none';
@@ -111,33 +112,36 @@ const Alert = () => {
         }
     }
     useEffect(()=>{
-       data && setcontent(data.reduce((count, val) => val.stat=='pending'?count+1:count, 0));
-    },[data])
+       data0 && setcontent(data0.reduce((count, val) => val.stat=='pending'?count+1:count, 0));
+    },[data0])
     useEffect(()=>{
        data1 && setcontent1(data1.reduce((count, val) => val.stat=='pending'?count+1:count, 0));
        data1 &&   console.log(setcontent1(data1.reduce((count, val) => val.stat=='pending'?count+1:count, 0))+"../");
     },[data1])
+    const {data}=useContext(AuthContext);
  return (
     <>
     <center id='button'>
-        <span className={active==0?'active':'nonactive'} onClick={()=>{setactive(0);window.localStorage.setItem('active',0);}}>shipment</span>
-        <span className={active==1?'active':'nonactive'} onClick={()=>{setactive(1);window.localStorage.setItem('active',1);}}>Form</span>
-        <span className={active==2?'active':'nonactive'} onClick={()=>{setactive(2);window.localStorage.setItem('active',2);}}>Action</span>
+        <span className={active==0?'active':'nonactive'} onClick={()=>{setactive(0);window.localStorage.setItem('active',0);window.location.reload()}}>shipment</span>
+        <span className={active==1?'active':'nonactive'} onClick={()=>{setactive(1);window.localStorage.setItem('active',1);window.location.reload()}}>Form</span>
+        <span className={active==2?'active':'nonactive'} onClick={()=>{setactive(2);window.localStorage.setItem('active',2);window.location.reload()}}>Action</span>
     </center>
     {active ==0 &&<div id='alert'>
         {
-            data && data.map((ele,index)=>{
+            data0 && data0.map((ele,index)=>{
                 return(<>
                 {ele.stat=='pending' && <div className="box">
-                    <div>Name: abc publishers</div>
-                    <div>adrress: abc street</div>
-                    <div>id: znind21</div>
-                    <div>Estimated arrival: 30/10/12</div>
+                    <div>Name: {ele.pub_name}</div>
+                    <div>adrress: {ele.address}</div>
+                    <div>id: {ele.pub_id}</div>
+                    <div>Estimated arrival: {ele.ETD}</div>
                 {<div>Shipment amount: 
                     {
                         ele.books.reduce((total, val) => total + val.quantity * val.price, 0)
                     }
                 </div>}
+                <button style={{display:'none'}}></button>
+                    <button style={{display:'none'}}></button>
                     <button onClick={()=>setview(index,0)}><i class="fa-regular fa-eye"></i></button>
                 </div>}
                 </>)
@@ -151,13 +155,13 @@ const Alert = () => {
     </div>}
     {active ==2 &&<div id='alert'>
         {
-            data &&data.map((ele,index)=>{
+            data0 &&data0.map((ele,index)=>{
                 return(<>
                 {ele.stat!='pending' && <div className="box">
-                    <div>Name: abc publishers</div>
-                    <div>adrress: abc street</div>
-                    <div>id: znind21</div>
-                    <div>Estimated arrival: 30/10/12</div>
+                <div>Name: {data.id}</div>
+                    <div>adrress: {ele.address}</div>
+                    <div>id: {ele.pub_id}</div>
+                    <div>Estimated arrival: {ele.ETD}</div>
                 {<div>Shipment amount: 
                     {
                         ele.books.reduce((total, val) => total + val.quantity * val.price, 0)
@@ -168,7 +172,7 @@ const Alert = () => {
                 </>)
             })
         }
-        {data && content==data.length && <center><div id='no-alert'>No actions yet for publisher!!!</div></center>}
+        {data0 && content==data0.length && <center><div id='no-alert'>No actions yet for publisher!!!</div></center>}
     </div>}
         <div id="view">
             <div className='close'>
@@ -178,7 +182,7 @@ const Alert = () => {
             {
                (active==0 || active==2) && viewdata && <>
                <div id='data'>
-               <b>Publication Name:</b> {viewdata.pub_name} <br />
+               <b>Publication Name:</b> {data.id} <br />
                <b>Books:</b> <br />
                {viewdata.books.map((val)=>{
                 return(<>
@@ -206,7 +210,7 @@ const Alert = () => {
             {
                (active==1 || active==2) && viewdata1 &&<>
                <div id='data1'>
-               <b>Publication Name:</b> {viewdata1.dealer_name} <br />
+               <b>Publication Name:</b> {viewdata1.pub_name} <br />
                <b>Books:</b> <br />
                {viewdata1.books.map((val)=>{
                 return(<>

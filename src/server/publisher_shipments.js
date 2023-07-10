@@ -10,7 +10,9 @@ let publisher_shipments = new Schema({
       "quantity": "Number",
       "price": "Number",
     }],
-    "stat":"String"
+    "stat":"String",
+    "ETD":"String",
+    "address":"String"
   });
 
 module.exports = mongoose.model("publisher_shipments", publisher_shipments);

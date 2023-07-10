@@ -30,11 +30,11 @@ const Login = ({set}) => {
   return (
     <>
     <div id="login">
-    <button onClick={()=>{set('/login');console.log('working')}}>Admin login</button>
+    <button className='alt-login' onClick={()=>{set('/login');console.log('working')}}>Admin login</button>
       <div id="login-box">
        <div> Publisher id <input type="text" name="did" id="did" /> </div>
         <div>password <input type="password" name="dpass" id="dpass" /> </div>
-        <button onClick={handleclick}>Login</button>
+        <button className='alt-login1' onClick={handleclick}>Login</button>
       </div>
     </div>
     </>

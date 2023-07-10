@@ -75,7 +75,7 @@ function App() {
         <Routes>
 
           <Route
-            path="/"
+            path="/home"
             element={
               <>
               <Heading />

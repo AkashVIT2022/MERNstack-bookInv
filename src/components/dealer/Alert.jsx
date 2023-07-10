@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import Dealer_from from './Dealer_form';
 const Alert = () => {
     const [data,setdata]=useState(null);
     const [data1,setdata1]=useState(null);
@@ -119,22 +120,22 @@ const Alert = () => {
  return (
     <>
     <center id='button'>
-        <span className={active==0?'active':'nonactive'} onClick={()=>{setactive(0);window.localStorage.setItem('active',0);}}>Shipment</span>
-        <span className={active==1?'active':'nonactive'} onClick={()=>{setactive(1);window.localStorage.setItem('active',1);}}>Form</span>
-        <span className={active==2?'active':'nonactive'} onClick={()=>{setactive(2);window.localStorage.setItem('active',2);}}>Action</span>
+        <span className={active==0?'active':'nonactive'} onClick={()=>{setactive(0);window.localStorage.setItem('active',0);window.location.reload()}}>Shipment</span>
+        <span className={active==1?'active':'nonactive'} onClick={()=>{setactive(1);window.localStorage.setItem('active',1);window.location.reload()}}>Form</span>
+        <span className={active==2?'active':'nonactive'} onClick={()=>{setactive(2);window.localStorage.setItem('active',2);window.location.reload()}}>Action</span>
     </center>
     {active ==0 &&<div id='alert'>
     {
             data1 && data1.map((ele,index)=>{
                 return(<>
                 {ele.stat=='pending' && <div className="box">
-                    <div>Name: abc publishers</div>
-                    <div>adrress: abc street</div>
-                    <div>id: znind21</div>
-                    <div>Estimated arrival: 30/10/12</div>
+                    <div>Name: {ele.dealer_name}</div>
+                    <div>adrress: {ele.address}</div>
+                    <div>id: {ele.dealer_id}</div>
+                    <div>Estimated arrival: {ele.ETA}</div>
                     <div></div>
-                    <button onClick={()=>setstatus1(ele,'accepted')}><i class="fa-solid fa-check"></i></button>
-                    <button onClick={()=>setstatus1(ele,'declined')}><i class="fa-solid fa-xmark"></i></button>
+                    <button style={{display:'none'}}></button>
+                    <button style={{display:'none'}}></button>
                     <button onClick={()=>setview1(index)}><i class="fa-regular fa-eye"></i></button>
                 </div>}
                 </>)
@@ -143,17 +144,17 @@ const Alert = () => {
         {content1==0 && <center className='no-alert'><div>No Pending Orders!!!</div></center>}
     </div>}
     {active ==1 &&<div id='alert'>
-    {<center className='no-alert'><div>This is for form</div></center>}
+    <Dealer_from/>
     </div>}
     {active ==2 &&<div id='alert'>
         {
             data1 &&data1.map((ele,index)=>{
                 return(<>
                 {ele.stat!='pending' && <div className="box">
-                    <div>Name: abc publishers</div>
-                    <div>adrress: abc street</div>
-                    <div>id: znind21</div>
-                    <div>Estimated arrival: 30/10/12</div>
+                <div>Name: {ele.dealer_name}</div>
+                    <div>adrress: {ele.address}</div>
+                    <div>id: {ele.dealer_id}</div>
+                    <div>Estimated arrival: {ele.ETA}</div>
                     <div></div>
                     <button style={{color:ele.stat=='declined'?'red':''}} onMouseOut={(e)=>removecolor(ele.stat,e)} onMouseOver={(e)=>setcolor(ele.stat,e)} onClick={()=>setview1(index)}><i class="fa-regular fa-eye"></i></button>
                 </div>}
@@ -171,7 +172,7 @@ const Alert = () => {
             {
                (active==0 || active==2) && viewdata && <>
                <div id='data'>
-               <b>Publication Name:</b> {viewdata.pub_name} <br />
+               <b>Publication Name:</b> {viewdata.dealer_name} <br />
                <b>Books:</b> <br />
                {viewdata.books.map((val)=>{
                 return(<>
@@ -197,9 +198,9 @@ const Alert = () => {
             </div>
             <div className="view_box">
             {
-               (active==1 || active==2) && viewdata1 &&<>
+               (active==0 || active==2) && viewdata1 &&<>
                <div id='data1'>
-               <b>Publication Name:</b> {viewdata1.dealer_name} <br />
+               <b>Dealer Name:</b> {viewdata1.dealer_name} <br />
                <b>Books:</b> <br />
                {viewdata1.books.map((val)=>{
                 return(<>

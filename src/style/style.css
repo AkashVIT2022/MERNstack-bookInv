@@ -98,10 +98,14 @@
   background-image: linear-gradient(#8e1e46 10%, #ffffff 100%);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border: none;
 }
 
 #navbar .card:nth-child(1):hover {
   animation: fade 0.7s forwards;
+  border: none;
   opacity: 0;
 }
 
@@ -109,6 +113,9 @@
   background-image: linear-gradient(#332995 10%, #ffffff 100%);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border: none;
 }
 
 #navbar .card:nth-child(2):hover {
@@ -120,6 +127,9 @@
   background-image: linear-gradient(#e6900e 10%, #ffffff 100%);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border: none;
 }
 
 #navbar .card:nth-child(3):hover {
@@ -129,13 +139,13 @@
 
 #navbar #card1 {
   position: absolute;
-  top: 17.8vh;
+  top: 19vh;
   display: flex;
   width: 100%;
   z-index: 1;
 }
 
-#navbar #card1 .card1 {
+#navbar .card1 .card1 {
   width: 20%;
   margin-left: auto;
   margin-right: auto;
@@ -151,11 +161,12 @@
   font-weight: 500;
   text-align: center;
   text-decoration: none;
+  border-bottom: 1px solid black;
   transition: background-color 0.3s, transform 0.3s;
   cursor: pointer;
 }
 
-#navbar #card1 .card1:hover {
+#navbar .card1 .card1:hover {
   background-color: #c5800c;
   transform: scale(1.05);
 }
@@ -313,6 +324,7 @@
   line-height: 14vh;
   padding-left: 10px;
   font-weight: 500;
+  font-size: 1rem;
 }
 #alert .box > button {
   height: 5vh;
@@ -520,8 +532,10 @@
   font-weight: 600;
 }
 
-#line {
+#lines {
   width: 60%;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 30px;
   margin-bottom: 30px;
 }
@@ -541,6 +555,25 @@
   color: rgb(49, 160, 160);
   background-color: white;
   transition-duration: 500ms;
+  border: 1px solid rgb(49, 160, 160);
+}
+
+.alt-login1 {
+  background-color: rgb(49, 160, 160);
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+  padding: 5px;
+  border: none;
+  margin-left: 2vw;
+  margin-top: 2vh;
+  transition-duration: 500ms;
+  cursor: pointer;
+}
+.alt-login1:hover {
+  color: rgb(49, 160, 160);
+  background-color: white;
+  transition-duration: 500ms;
+  border: 1px solid rgb(49, 160, 160);
 }
 
 .body_css {
@@ -552,8 +585,22 @@
   justify-content: center;
   align-items: center;
   margin: 0;
-  height: 100vh;
+  height: 90vh;
   text-shadow: 8px 8px 10px rgba(0, 0, 0, 0.5490196078);
+}
+
+.input-group-text-span {
+  display: flex;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  text-align: center;
+  white-space: nowrap;
+  background-color: var(--bs-tertiary-bg);
+  border: none;
 }
 
 .center-input {
@@ -571,6 +618,7 @@
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.5s;
+  height: 60vh;
 }
 
 .container1:hover {
@@ -598,7 +646,9 @@
   text-decoration: underline;
 }
 
-.input-group > .form-control, .input-group > .form-floating, .input-group > .form-select .inp {
+.input-group > .form-control,
+.input-group > .form-floating,
+.input-group > .form-select .inp {
   position: relative;
   flex: 1 1 auto;
   width: 400px;
@@ -630,7 +680,7 @@
   display: flex;
   flex-direction: column;
   border: 1px solid silver;
-  z-index: 2;
+  z-index: 1;
   position: absolute;
   background-color: rgb(228, 215, 189);
   width: 20%;
@@ -646,21 +696,6 @@
   margin: 1px 0;
 }
 
-.book-list {
-  overflow-y: scroll; /* Enable vertical scrolling */
-  margin-top: 20px;
-  background-color: wheat;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.5s;
-  height: 150px;
-  border: none;
-  width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Hide the scrollbar */
 .book-list::-webkit-scrollbar {
   display: none;
 }
@@ -669,6 +704,21 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
+.book-list {
+  margin-top: 20px;
+  background-color: wheat;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.5s;
+  height: 170px;
+  border: none;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: scroll;
+}
+
+/* Hide the scrollbar */
 .book-list:hover {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
 }
@@ -698,7 +748,6 @@
   padding: 8px;
   text-align: center;
   background-color: wheat;
-  border-radius: 10px;
   font-size: 25px;
 }
 
@@ -744,70 +793,103 @@
   position: absolute;
   display: inline-block;
   cursor: pointer;
-  top: 29%;
-  left: 48%;
+  top: 25vh;
+  left: 30vw;
   z-index: 2;
-  font-size: 40px;
   text-align: center;
-  opacity: 0.7;
+  opacity: 1;
 }
 
-/* The actual popup (appears on top) */
 .popup .popuptext {
   visibility: hidden;
-  width: 270px;
+  width: 40vw;
+  height: 30vh;
   background-color: wheat;
   color: red;
   text-align: center;
   border-radius: 8px;
-  padding: 8px 0;
+  padding: 8px;
   position: absolute;
+  font-size: 2rem;
   z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -80px;
   text-shadow: none;
+  box-shadow: 5px 5px 10px 10px rgba(192, 192, 192, 0.478);
 }
 
-/* Popup arrow */
-.popup .popuptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: wheat transparent transparent transparent;
+.popup #popupText {
+  line-height: 30vh;
 }
 
-/* Toggle this class when clicking on the popup container (hide and show the popup) */
 .popup .show {
   visibility: visible;
-  animation: fadeIn 0.5s;
   opacity: 1;
+  animation: fadeIn 0.5s;
+  transition-duration: 500ms;
 }
 
 .popup .disappear {
   visibility: hidden;
-  animation: fadeOut 0.5s;
   opacity: 0;
+  animation: fadeOut 0.5s;
+  transition-duration: 500ms;
+}
+
+.close-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border: none;
+  background-color: transparent;
+  font-size: 2.8rem;
+  color: red;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: darkred;
 }
 
 /* Add animation (fade in the popup) */
 @keyframes fadeIn {
   from {
     opacity: 0;
+    transition-duration: 500ms;
   }
   to {
     opacity: 1;
+    transition-duration: 500ms;
   }
 }
 @keyframes fadeOut {
   from {
     opacity: 1;
+    transition-duration: 500ms;
   }
   to {
     opacity: 0;
+    transition-duration: 500ms;
   }
+}
+#did, #dpass {
+  margin-left: 30px;
+  height: 4vh;
+  border-radius: 5px;
+  border: none;
+}
+
+#logout {
+  height: 4vh;
+  line-height: 4vh;
+  border: none;
+  border-radius: 6px;
+  margin-left: 5px;
+  background-color: red;
+  color: white;
+  transition-duration: 500ms;
+}
+#logout:hover {
+  transition-duration: 500ms;
+  background-color: white;
+  color: red;
+  border: red 1px solid;
 }/*# sourceMappingURL=style.css.map */

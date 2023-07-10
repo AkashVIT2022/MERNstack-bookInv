@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import Axios from "axios"
 import { AuthContext } from "../context/AuthContext";
-const Publisher = () => {
-  const { data } = useContext(AuthContext);
-  const [publisher_name, setPublisherName] = useState("");
+const Dealer = () => {
+  const {data} =useContext(AuthContext);
+  const [dealer_name, setDealerName] = useState("");
   const [bookName, setBookName] = useState("");
   const [quantity, setQuantity] = useState(1); // Initialize quantity to 1
-  const [price, setPrice] = useState(0);
+  const [author, setAuthor] = useState("");
   const [address, setAddress] = useState("");
-  const [publisherID,setPublisherID] = useState("")
-
-  const [ETD, setETD] = useState("")
+  const [ETA, setETA] = useState("")
+  const [dealerID,setDealerID] =useState("");
 
   const [item_I, setItem] = useState("");
   const [bookList, setBookList] = useState([]); // Array to store book information
@@ -19,9 +18,8 @@ const Publisher = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await Axios.get('http://localhost:3001/pub_inv/api-get');
+        const response = await Axios.get('http://localhost:3001/deal_inv/api-get');
         if (response.status === 200) {
-          // console.log(response.data);
           setData(response.data);
         } else {
           throw new Error('Failed to fetch data');
@@ -31,26 +29,27 @@ const Publisher = () => {
         alert('Error: Failed to fetch data');
       }
     };
-    setPublisherName(data.id);
-    document.getElementById('publisher_name').disabled=true;
+    setDealerName(data.id);
+    document.getElementById('dealer_name').disabled=true;
     fetchData();
   }, []);
+
 
   const Popup = (arg) => {
     var popup = document.getElementById("myPopup");
     if (arg === "show") {
       document.getElementById("FORM").style.opacity = 0.3;
-      document.getElementById("FORM").style.transitionDuration = '500ms';
+      document.getElementById("FORM").style.transitionDuration='500ms';
       popup.classList.add("show");
     } else if (arg === "disappear") {
       document.getElementById("FORM").style.opacity = 1;
-      document.getElementById("FORM").style.transitionDuration = '500ms';
+      document.getElementById("FORM").style.transitionDuration='500ms';
       popup.classList.remove("show");
     }
   };
 
-  const onChangePublisherName = (event) => {
-    setPublisherName(event.target.value);
+  const onChangeDealer_name = (event) => {
+    setDealerName(event.target.value);
   };
 
   const onChangeBookName = (event) => {
@@ -58,15 +57,12 @@ const Publisher = () => {
   };
 
   const onChangeQuantity = (event) => {
-    setQuantity(parseInt(event.target.value));
+    setQuantity(parseInt(event.target.value)); // Convert the value to an integer
   };
 
-  const onChangePrice = (event) => {
-    setPrice(parseFloat(event.target.value));
-  }
 
-  const onChangeETD = (event) => {
-    setETD(event.target.value);
+  const onChangeETA = (event) => {
+    setETA(event.target.value);
   }
 
   const onChangeAddress = (event) => {
@@ -75,9 +71,10 @@ const Publisher = () => {
 
   const onSearchBookName = (searchTerm, item) => {
     setBookName(searchTerm);
-    setPublisherID(item.pub_id)
     setQuantity(item.quantity);
-    setItem(item.quantity)
+    setDealerID(item.dealer_id);
+    setAuthor(item.author);
+    setItem(item.quantity);
   };
 
   const handleIncreaseQuantity = () => {
@@ -92,36 +89,36 @@ const Publisher = () => {
 
   const handleAdd = () => {
 
-    if (item_I < quantity && publisher_name !== "" && bookName !== "" && quantity !== "" && price !== "" && ETD !== "" && address !== "") {
+    if (item_I < quantity && dealer_name !== "" && bookName !== "" && quantity !== "" && author !== "" && ETA !== "" && address !== "") {
       Popup("show");
       document.getElementById("quan").style.border = "5px solid red";
       document.getElementById("popupText").textContent = "Quantity is higher";
 
-    } else if (publisher_name !== "" && bookName !== "" && quantity !== "" && item_I >= quantity && price !== "" && ETD !== "" && address !== "") {
+    } else if (dealer_name !== "" && bookName !== "" && quantity !== "" && item_I >= quantity && author !== "" && ETA !== "" && address !== "") {
       Popup("disappear");
       const bookInfo = {
         name: bookName,
         quantity: quantity,
-        price: price,
+        author: author,
+
       };
 
       document.getElementById("quan").style.border = "none";
-
+      
 
       setBookList([...bookList, bookInfo]); // Add book information to the bookList array
       setBookName("");
       setQuantity(1);
-      setPrice(0);
+      setAuthor("");
     }
     else {
       Popup("show");
       
       document.getElementById("popupText").textContent = "Enter all fields";
+
     }
     console.log(bookList)
   };
-
-
 
   const handleDelete = (index) => {
     const updatedBookList = [...bookList];
@@ -136,15 +133,12 @@ const Publisher = () => {
   const handleOrderRequest = () => {
 
     console.log(bookList);
-    /*console.log(publisherID)*/
+    /*console.log(dealerID)*/
     if (bookList.length > 0) {
       /*console.log(bookList)*/
-      let dataSend = {
-        "pub_id": publisherID, "pub_name": data.id, "books": bookList, "ETD": ETD, "address": address, "stat": "pending"
-      }
-      
+      let dataSend = { "dealer_id": dealerID,dealer_name:data.id, "books": bookList, "ETA": ETA, "address": address, "stat": "pending" }
       console.log(dataSend)
-      fetch('http://localhost:3001/publish/publish-request', {
+      fetch('http://localhost:3001/deal/dealer-request', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -156,8 +150,9 @@ const Publisher = () => {
           console.log(data);
           setBookList([]);
           setAddress("");
-          setETD("");
+          setETA("");
           Popup("show");
+          
           document.getElementById("popupText").textContent = "Data is send to the database";
           document.getElementById("popupText").style.color = "Green";
           document.getElementById("closebutton").style.color = "Green";
@@ -172,25 +167,25 @@ const Publisher = () => {
   }
 
   return (
-    <div className="text-center mx-auto">
-      <h1 className="h1">PUBLISHER FORM</h1>
-
-       <div className="popup">
+    <div className="text-center ">
+      <h1 className="h1">DEALER FORM</h1>
+      
+      <div className="popup">
         <span className="popuptext" id="myPopup">
           <span id="popupText">Quantity is higher</span>
-          <button className="close-btn" id="closebutton" onClick={() => Popup("disappear")}>
+          <button className="close-btn" onClick={() => Popup("disappear")}>
             &times;
           </button>
         </span>
       </div>
 
       <div className="container1" id="FORM">
-        <table className="container2 table table-borderless" style={{ backgroundColor: "wheat" }}>
+        <table className="container2 table table-borderless">
           <tbody>
             <tr>
               <td>
                 <div className="input-group">
-                  <span className="input-group-text input-label">Publisher Name</span>
+                  <span className="input-group-text-span input-label">Dealer Name</span>
                 </div>
               </td>
               <td>
@@ -199,10 +194,10 @@ const Publisher = () => {
                     <input
                       className="form-control inp"
                       type="text"
-                      name="publisher_name"
-                      id="publisher_name"
-                      value={publisher_name}
-                      onChange={onChangePublisherName}
+                      name="dealer_name"
+                      id="dealer_name"
+                      value={dealer_name}
+                      onChange={onChangeDealer_name}
                     />
                   </div>
                 </div>
@@ -211,7 +206,7 @@ const Publisher = () => {
             <tr>
               <td>
                 <div className="input-group">
-                  <span className="input-group-text input-label">Book Name</span>
+                  <span className="input-group-text-span input-label">Book Name</span>
                 </div>
               </td>
               <td>
@@ -233,32 +228,27 @@ const Publisher = () => {
               <td></td>
               <td>
                 <div className="dropdown">
-                  {/* {console.log(booksData)} */}
                   {booksData.filter(item => {
                     const searchitem = bookName.toLowerCase();
                     const name = item.name.toLowerCase();
-                    console.log(searchitem && item.publisher_name === publisher_name && name.startsWith(searchitem) && name !== searchitem)
-                    return searchitem && item.publisher_name === publisher_name && name.startsWith(searchitem) && name !== searchitem
+                    return searchitem && name.startsWith(searchitem) && name !== searchitem
                   })
                     .slice(0, 6)
-                    .map((item) => {
-                      // {console.log(item.name)}
-                      return (<>
-                        <div onClick={() => onSearchBookName(item.name, item)}
-                          className="dropdown-row"
-                          key={item.name}
-                        >
-                          {item.name}
-                        </div>
-                      </>)
-                    })}
+                    .map((item) => (
+                      <div onClick={() => onSearchBookName(item.name, item)}
+                        className="dropdown-row"
+                        key={item.name}
+                      >
+                        {item.name}
+                      </div>
+                    ))}
                 </div>
               </td>
             </tr>
             <tr id="quan">
               <td>
                 <div className="input-group" >
-                  <span className="input-group-text input-label">Quantity</span>
+                  <span className="input-group-text-span input-label">Quantity</span>
                 </div>
               </td>
               <td>
@@ -289,29 +279,27 @@ const Publisher = () => {
             </tr>
             <tr>
               <td>
-                <div className="input-group" >
-                  <span className="input-group-text input-label">Price</span>
+                <div className="input-group">
+                  <span className="input-group-text-span input-label">Author</span>
                 </div>
               </td>
               <td>
-                <div className="input-group ">
-
+                <div className="input-group">
                   <input
                     className="form-control inp"
-                    type="number"
-                    name="quantity"
-                    id="quantity"
-                    value={price}
-                    onChange={onChangePrice}
+                    type="text"
+                    name="author"
+                    id="author"
+                    value={author}
+                    disabled
                   />
-
                 </div>
               </td>
             </tr>
             <tr>
               <td>
                 <div className="input-group" >
-                  <span className="input-group-text input-label">Address</span>
+                  <span className="input-group-text-span input-label">Address</span>
                 </div>
               </td>
               <td>
@@ -334,7 +322,7 @@ const Publisher = () => {
             <tr>
               <td>
                 <div className="input-group" >
-                  <span className="input-group-text input-label">ETD</span>
+                  <span className="input-group-text-span input-label">ETA</span>
                 </div>
               </td>
               <td>
@@ -343,10 +331,10 @@ const Publisher = () => {
                   <input
                     className="form-control inp"
                     type="date"
-                    name="ETD"
-                    id="ETD"
-                    value={ETD}
-                    onChange={onChangeETD}
+                    name="ETA"
+                    id="ETA"
+                    value={ETA}
+                    onChange={onChangeETA}
                   />
 
                 </div>
@@ -368,10 +356,10 @@ const Publisher = () => {
       </div>
 
       <div className="book-list">
-
+        
         <table className="table table-light table-borderless">
           <thead>
-            <tr>
+          <tr>
               <th colspan="4">
                 <h2>Book List</h2>
               </th>
@@ -379,8 +367,7 @@ const Publisher = () => {
             <tr>
               <th>Book Name</th>
               <th>Quantity</th>
-              <th>Price</th>
-
+              <th>Author</th>
               <th>
                 <button
                   className="btn btn-sm btn-light"
@@ -393,12 +380,14 @@ const Publisher = () => {
 
             </tr>
           </thead>
-          <tbody className="tbody">
+          <tbody>
             {bookList.map((book, index) => (
               <tr key={index}>
                 <td>{book.name}</td>
                 <td>{book.quantity}</td>
-                <td>{book.price}</td>
+                <td>{book.author}</td>
+
+
                 <td>
                   <button
                     className="btn btn-danger btn-sm"
@@ -415,7 +404,7 @@ const Publisher = () => {
       </div>
       <br />
       <button
-        className="btn  btn-lg but "
+        className="btn  btn-lg but"
         onClick={handleOrderRequest}
         disabled={bookList.length === 0} // Disable the button if the book list is empty
       >
@@ -426,4 +415,4 @@ const Publisher = () => {
   );
 };
 
-export default Publisher;
+export default Dealer;

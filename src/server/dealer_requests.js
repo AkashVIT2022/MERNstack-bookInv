@@ -9,7 +9,9 @@ let dealer_requests = new Schema({
       "name": "String",
       "quantity": "Number"
     }],
-    "stat":"String"
+    "stat":"String",
+    "ETA":"String",
+    "address":"String"
   });
 
 module.exports = mongoose.model("dealer_requests", dealer_requests);

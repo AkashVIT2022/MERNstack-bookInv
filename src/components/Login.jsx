@@ -22,7 +22,7 @@ const Login = ({set}) => {
         dispatch({type:"SET_USER",payload:id});
         document.cookie = "id="+id+"; expires="+((new Date()).getDate+10)+"; path=/";
         window.localStorage.setItem('auth',true);
-       navigate('/');
+       navigate('/home');
       }
     })
     .catch((err)=>console.log(err));
@@ -35,7 +35,7 @@ const Login = ({set}) => {
       <div id="login-box">
        <div> Admin id <input type="text" name="did" id="did" /> </div>
         <div>password <input type="password" name="dpass" id="dpass" /> </div>
-        <button onClick={handleclick}>Login</button>
+        <button className='alt-login1' onClick={handleclick}>Login</button>
       </div>
     </div>
     </>

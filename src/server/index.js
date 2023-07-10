@@ -12,6 +12,7 @@ let publisher_shipments=require('./publisher_shipments');
 let dealer_requests=require('./dealer_requests');
 let publisher_inventorys=require('./publisher_inventorys');
 let dealer_inventorys=require('./dealer_inventorys');
+let admin_inventorys=require('./admin_inventorys');
 
 let publisher_InvRoute=require('./controller/publisher_InvRoute');
 let dealer_InvRoute = require("./controller/dealer_InvRoute");
@@ -96,8 +97,15 @@ app.post('/update_shipment_status',async(req,res)=>{
     if(result.stat=='accepted'){
       result.books.map((val)=>{
         publisher_inventorys.findOneAndUpdate({name:val.name},{$inc:{quantity:-val.quantity}},{returnOriginal:false})
+        .then((response)=>{
+          console.log(response);
+        })
+        .catch((err)=>console.log(err));
+
+        admin_inventorys.findOneAndUpdate({publisher_name:val.name},{$inc:{quantity:+val.quantity},$set:{price:val.price}},{returnOriginal:false})
         .then((response)=>console.log(response))
         .catch((err)=>console.log(err));
+
       })
     }
   })
@@ -115,6 +123,11 @@ app.post('/update_dealer_status',async(req,res)=>{
         dealer_inventorys.findOneAndUpdate({name:val.name},{$inc:{quantity:+val.quantity}},{returnOriginal:false})
         .then((response)=>console.log(response))
         .catch((err)=>console.log(err));
+
+        admin_inventorys.findOneAndUpdate({publisher_name:val.name},{$inc:{quantity:-val.quantity},$set:{price:val.price}},{returnOriginal:false})
+        .then((response)=>console.log(response))
+        .catch((err)=>console.log(err));
+
       })
     }
   })
