@@ -28,7 +28,7 @@ const Heading = ({set}) => {
         BookWorm
     </div>
    {
-    window.location.pathname!=='https://dip9381.github.io/mern-c10/#/dealer_login'? 
+    window.location.hash!=='#/dealer_login'? 
     <div id='cont'>
       <button id='logout' onClick={()=>{logout();set('dealer_login')}}>Logout</button>
       {window.localStorage.getItem('auth')=='true' &&(user!==null?<div>username: {user}</div>:window.location.reload())}
