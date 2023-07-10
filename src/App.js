@@ -75,7 +75,7 @@ function App() {
         <Routes>
 
           <Route
-            path="/home"
+           exact path="/home"
             element={
               <>
               <Heading />
@@ -92,7 +92,7 @@ function App() {
           ></Route>
 
           <Route
-            path="/product_shipment"
+            exact path="/product_shipment"
             element={
               <>
               <Heading />
@@ -109,13 +109,13 @@ function App() {
           ></Route>
 
           <Route
-          path="/login" id='main' element={<>
+          exact path="/login" id='main' element={<>
           <Heading />
           <Login set={handlecallback}/>
           </>}></Route>
 
           <Route
-          path="/alert"
+          exact path="/alert"
           element={<>
           <Heading />
           <Alert/>
@@ -123,7 +123,7 @@ function App() {
           ></Route>
 
           <Route 
-          path="/publisher_login"
+          exact path="/publisher_login"
           element={
             <>
             <Heading_pub />
@@ -134,7 +134,7 @@ function App() {
           </Route>
 
           <Route
-            path="/publisher_home"
+            exact path="/publisher_home"
             element={
               <>
               <Heading_pub set={setloginpage}/>
@@ -151,7 +151,7 @@ function App() {
           ></Route>
 
           <Route
-          path="/publisher_alert"
+          exact path="/publisher_alert"
           element={<>
           <Heading_pub set={setloginpage}/>
           <Alert_pub/>
@@ -159,7 +159,7 @@ function App() {
           ></Route>
 
           <Route 
-          path="/dealer_login"
+          exact path="/dealer_login"
           element={
             <>
             <Heading_dealer />
@@ -170,7 +170,7 @@ function App() {
           </Route>
 
           <Route
-            path="/dealer_home"
+            exact path="/dealer_home"
             element={
               <>
               <Heading_dealer set={setloginpage}/>
@@ -187,7 +187,7 @@ function App() {
           ></Route>
 
           <Route
-          path="/dealer_alert"
+          exact path="/dealer_alert"
           element={<>
           <Heading_dealer set={setloginpage}/>
           <Alert_dealer/>
