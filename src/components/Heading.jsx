@@ -28,7 +28,7 @@ const Heading = () => {
         BookWorm
     </div>
    {
-    window.location.pathname!=='/login'? 
+    window.location.pathname!=='#/login'? 
     <div id='cont'>
       <button id='logout' onClick={logout}>Logout</button>
      {window.localStorage.getItem('auth')=='true' &&(user!==null?<div>username: {user}</div>:window.location.reload())}

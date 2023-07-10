@@ -28,7 +28,7 @@ const Heading = ({set}) => {
         BookWorm
     </div>
    {
-    window.location.pathname!=='/dealer_login'? 
+    window.location.pathname!=='#/dealer_login'? 
     <div id='cont'>
       <button id='logout' onClick={()=>{logout();set('dealer_login')}}>Logout</button>
       {window.localStorage.getItem('auth')=='true' &&(user!==null?<div>username: {user}</div>:window.location.reload())}
