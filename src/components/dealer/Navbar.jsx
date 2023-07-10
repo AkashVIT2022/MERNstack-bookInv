@@ -4,10 +4,10 @@ const Navbar = () => {
   let navigate=useNavigate();
   return (
     <div id="navbar">
-      <div className="card">
+      <div className="card" onClick={()=>navigate('/dealer_alert')}>
         <div>
           <i className="fa-solid fa-bell"></i> <br />
-          <a className="card1" onClick={()=>navigate('/dealer_alert')} rel="noopener noreferrer">
+          <a className="card1"  rel="noopener noreferrer">
             Alert
           </a>
         </div>
