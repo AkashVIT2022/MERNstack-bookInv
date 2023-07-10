@@ -99,12 +99,12 @@ app.post('/update_shipment_status',async(req,res)=>{
         publisher_inventorys.findOneAndUpdate({name:val.name},{$inc:{quantity:-val.quantity}},{returnOriginal:false})
         .then((response)=>{
           console.log(response);
+          admin_inventorys.findOneAndUpdate({name:val.name},{$inc:{quantity:+val.quantity},$set:{price:val.price}},{returnOriginal:false})
+          .then((response)=>console.log(response,'//'))
+          .catch((err)=>console.log(err));
         })
         .catch((err)=>console.log(err));
-
-        admin_inventorys.findOneAndUpdate({publisher_name:val.name},{$inc:{quantity:+val.quantity},$set:{price:val.price}},{returnOriginal:false})
-        .then((response)=>console.log(response))
-        .catch((err)=>console.log(err));
+        console.log(val);
 
       })
     }
@@ -124,7 +124,7 @@ app.post('/update_dealer_status',async(req,res)=>{
         .then((response)=>console.log(response))
         .catch((err)=>console.log(err));
 
-        admin_inventorys.findOneAndUpdate({publisher_name:val.name},{$inc:{quantity:-val.quantity},$set:{price:val.price}},{returnOriginal:false})
+        admin_inventorys.findOneAndUpdate({name:val.name},{$inc:{quantity:-val.quantity},$set:{price:val.price}},{returnOriginal:false})
         .then((response)=>console.log(response))
         .catch((err)=>console.log(err));
 
