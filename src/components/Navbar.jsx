@@ -12,7 +12,7 @@ const Navbar = () => {
           </a>
         </div>
       </div>
-      <div className="card">
+      <div className="card" onClick={()=>navigate('/inventory')}>
         <div>
           <i className="fa-solid fa-layer-group"></i> <br />
           <a className="card1" href="/Overview">

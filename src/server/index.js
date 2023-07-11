@@ -4,8 +4,11 @@ const cors=require('cors')
 const { ObjectId } = require('mongodb');
 const bodyParser =require('body-parser');
 const app=express();
+require('dotenv').config();
 app.use(cors());
 app.use(express.json());
+
+let stockRoutes=require('./routes/stocks')
 
 let details=require('./details');
 let publisher_shipments=require('./publisher_shipments');
@@ -28,60 +31,61 @@ connection.once("open", function() {
   console.log("Connection with MongoDB was successful");
 });
 
+
 app.get('/details', async(req,res)=>{
   const {id,pass}=req.query;
   //console.log(id,pass);
-    details.find({id:id,password:pass})
-    .then((result)=>{
-        //console.log(result);
-       // res.json(result);
-        if(result.length==0)
-        res.json('not found')
-        else
-        res.json('found');
-    })
-    .catch((err)=>console.log(err));
+  details.find({id:id,password:pass})
+  .then((result)=>{
+    //console.log(result);
+    // res.json(result);
+    if(result.length==0)
+    res.json('not found')
+    else
+    res.json('found');
+  })
+  .catch((err)=>console.log(err));
 })
 app.get('/pub_details', async(req,res)=>{
   const {id,pass}=req.query;
   // console.log(id,pass);
-    details.find({pub_id:id,password:pass})
-    .then((result)=>{
-        // console.log(result);
-      //  res.json(result);
+  details.find({pub_id:id,password:pass})
+  .then((result)=>{
+    // console.log(result);
+    //  res.json(result);
         if(result.length==0)
         res.json('not found')
         else
         res.json('found');
+      })
+      .catch((err)=>console.log(err));
     })
-    .catch((err)=>console.log(err));
-})
-app.get('/dealer_details', async(req,res)=>{
-  const {id,pass}=req.query;
-  // console.log(id,pass);
-    details.find({dealer_id:id,password:pass})
-    .then((result)=>{
+    app.get('/dealer_details', async(req,res)=>{
+      const {id,pass}=req.query;
+      // console.log(id,pass);
+      details.find({dealer_id:id,password:pass})
+      .then((result)=>{
         // console.log(result);
-      //  res.json(result);
+        //  res.json(result);
         if(result.length==0)
         res.json('not found')
         else
         res.json('found');
+      })
+      .catch((err)=>console.log(err));
     })
-    .catch((err)=>console.log(err));
-})
-
-app.get('/publisher_shipment',async(req,res)=>{
-  publisher_shipments.find({})
-  .then((result)=>{
-   // console.log(result);
-    res.json(result);
-  })
-  .catch((err)=>console.log(err));
-})
-app.get('/dealer_request',async(req,res)=>{
-  dealer_requests.find({})
-  .then((result)=>{
+    
+    app.get('/publisher_shipment',async(req,res)=>{
+      publisher_shipments.find({})
+      .then((result)=>{
+        // console.log(result);
+        res.json(result);
+      })
+      .catch((err)=>console.log(err));
+    })
+    app.get('/dealer_request',async(req,res)=>{
+      dealer_requests.find({})
+      .then((result)=>{
   //  console.log(result);
     res.json(result);
   })
@@ -105,7 +109,7 @@ app.post('/update_shipment_status',async(req,res)=>{
         })
         .catch((err)=>console.log(err));
         console.log(val);
-
+        
       })
     }
   })
@@ -123,11 +127,11 @@ app.post('/update_dealer_status',async(req,res)=>{
         dealer_inventorys.findOneAndUpdate({name:val.name},{$inc:{quantity:+val.quantity}},{returnOriginal:false})
         .then((response)=>console.log(response))
         .catch((err)=>console.log(err));
-
+        
         admin_inventorys.findOneAndUpdate({name:val.name},{$inc:{quantity:-val.quantity},$set:{price:val.price}},{returnOriginal:false})
         .then((response)=>console.log(response))
         .catch((err)=>console.log(err));
-
+        
       })
     }
   })
@@ -144,6 +148,7 @@ app.use('/deal_inv',dealer_InvRoute);
 app.use("/publish",publisherRoute);
 app.use("/deal",dealerRoute);
 
+app.use('/api/stocks',stockRoutes)
 
 app.listen(3001,()=>{
     console.log('server running at 3001');

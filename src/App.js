@@ -14,6 +14,7 @@ import Login_dealer from './components/dealer/Login.jsx';
 import Heading_dealer from './components/dealer/Heading.jsx';
 import Navbar_dealer from './components/dealer/Navbar.jsx';
 import Alert_dealer from './components/dealer/Alert.jsx';
+import Inventory from './components/Inventory.js';
 import { useEffect, useState } from "react";
 function App() {
   const navigate=useNavigate();
@@ -191,6 +192,14 @@ function App() {
           element={<>
           <Heading_dealer set={setloginpage}/>
           <Alert_dealer/>
+          </>}
+          ></Route>
+
+          <Route
+          exact path="/inventory"
+          element={<>
+          <Heading set={setloginpage}/>
+          <Inventory/>
           </>}
           ></Route>
 
