@@ -15,6 +15,9 @@ import Heading_dealer from './components/dealer/Heading.jsx';
 import Navbar_dealer from './components/dealer/Navbar.jsx';
 import Alert_dealer from './components/dealer/Alert.jsx';
 import Inventory from './components/Inventory.js';
+import D_Inventory from './components/d_inventory.js';
+import P_Inventory from './components/p_inventory.js';
+import Summary from './components/Summary.jsx';
 import { useEffect, useState } from "react";
 function App() {
   const navigate=useNavigate();
@@ -200,6 +203,44 @@ function App() {
           element={<>
           <Heading set={setloginpage}/>
           <Inventory/>
+          </>}
+          ></Route>
+
+          <Route
+          exact path="/dealer_inventory"
+          element={<>
+          <Heading set={setloginpage}/>
+          <D_Inventory/>
+          </>}
+          ></Route>
+
+          <Route
+          exact path="/publisher_inventory"
+          element={<>
+          <Heading set={setloginpage}/>
+          <P_Inventory/>
+          </>}
+          ></Route>
+
+          <Route
+          exact path="/admin_summary"
+          element={<>
+          <Heading set={setloginpage}/>
+          <Summary/>
+          </>}
+          ></Route>
+          <Route
+          exact path="/dealer_summary"
+          element={<>
+          <Heading set={setloginpage}/>
+          <Summary/>
+          </>}
+          ></Route>
+          <Route
+          exact path="/publisher_summary"
+          element={<>
+          <Heading set={setloginpage}/>
+          <Summary/>
           </>}
           ></Route>
 

@@ -6,7 +6,8 @@ let dealer_inventorys = new Schema({
     "id": "String",
     "name": "String",
     "quantity":"Number",
-    "publisher_id":"String",
+    "dealer_id":"String",
+    "dealer_name":"String",
     "author":"String",
     "year":"Number"
   });

@@ -6,7 +6,7 @@ const Body = () => {
   return (
     <div id="body">
       <center>
-        <h3>Top Categories</h3>
+        <h3>About us</h3>
       </center>
       <div id="categ">
         <div className="categ-img">
@@ -20,7 +20,16 @@ const Body = () => {
         </div>
       </div>
       <div id="categ-cont">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit eaque amet nisi qui pariatur architecto vero sunt quo laudantium, nostrum nobis incidunt. Praesentium tenetur eveniet perferendis iste recusandae velit magnam? Asperiores omnis reiciendis, voluptatibus quidem facilis eaque deleniti repudiandae adipisci aut optio, vero ea enim cupiditate aspernatur. Ratione, eius praesentium? Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum voluptas nesciunt natus quam dolores. Similique accusantium molestiae impedit, culpa quae modi illo beatae iure magnam, alias vitae tenetur est! Laborum, cum praesentium repellendus consectetur porro laboriosam voluptatum? Ipsa distinctio laborum sapiente nemo expedita, dignissimos officia nihil blanditiis quae fugiat esse. Cumque ea officiis unde laboriosam magni eligendi praesentium illo, a culpa ullam laudantium doloremque rem voluptatem aspernatur, molestiae, omnis sunt atque suscipit cum esse veritatis. Doloremque nisi voluptatem provident mollitia amet, asperiores fugit consequuntur nihil magnam velit in deleniti aliquam. Numquam non ea ratione odio, harum quaerat deserunt dolore explicabo.
+      Welcome to Bookworm, your go-to platform for connecting dealers, publishers, and myself in the exciting world of books. As the founder of this innovative website, I am thrilled to offer a centralized hub where dealers and publishers can seamlessly manage their inventories and conduct business with ease.
+
+At Bookworm, I understand the importance of efficiency and convenience. With our user-friendly interface, dealers can effortlessly browse through a vast catalog of books, explore various genres, and discover new titles. They can easily place orders, track shipments, and manage their inventory—all at their fingertips.
+For publishers, Bookworm presents an invaluable opportunity to showcase their publications and reach a wider audience. By leveraging our platform, they can connect directly with eager dealers, expanding their distribution network and boosting sales. With real-time analytics and reporting tools, publishers can gain insights into market trends, enabling them to make informed decisions and refine their strategies.
+
+As the middleman, I ensure smooth communication and seamless transactions between dealers and publishers. I facilitate negotiations, handle logistics, and provide a secure payment system, giving both parties the peace of mind to focus on what they do best—bringing remarkable books to readers.
+
+Bookworm is not just a website; it's a community passionate about literature. With our interactive forums and discussion boards, dealers and publishers can connect, exchange ideas, and foster collaborations. Together, we can celebrate the power of storytelling and nurture a vibrant literary ecosystem.
+
+Join me at Bookworm and discover a world of endless possibilities for your business. Whether you're a dealer searching for the next bestseller or a publisher looking to expand your reach, Bookworm is the ultimate destination for all your literary aspirations. Let's embark on this exciting journey together and make the book industry thrive.
       </div>
     </div>
   );

@@ -9,6 +9,8 @@ app.use(cors());
 app.use(express.json());
 
 let stockRoutes=require('./routes/stocks')
+let dealerroutes=require('./routes/dealer')
+let publisherroutes=require('./routes/publisher')
 
 let details=require('./details');
 let publisher_shipments=require('./publisher_shipments');
@@ -128,7 +130,7 @@ app.post('/update_dealer_status',async(req,res)=>{
         .then((response)=>console.log(response))
         .catch((err)=>console.log(err));
         
-        admin_inventorys.findOneAndUpdate({name:val.name},{$inc:{quantity:-val.quantity},$set:{price:val.price}},{returnOriginal:false})
+        admin_inventorys.findOneAndUpdate({dealer_name:id,name:val.name},{$inc:{quantity:-val.quantity},$set:{price:val.price}},{returnOriginal:false})
         .then((response)=>console.log(response))
         .catch((err)=>console.log(err));
         
@@ -149,6 +151,8 @@ app.use("/publish",publisherRoute);
 app.use("/deal",dealerRoute);
 
 app.use('/api/stocks',stockRoutes)
+app.use('/api/dealer',dealerroutes)
+app.use('/api/publisher',publisherroutes)
 
 app.listen(3001,()=>{
     console.log('server running at 3001');

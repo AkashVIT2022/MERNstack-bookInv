@@ -15,15 +15,15 @@ const Navbar = () => {
       <div className="card" onClick={()=>navigate('/inventory')}>
         <div>
           <i className="fa-solid fa-layer-group"></i> <br />
-          <a className="card1" href="/Overview">
+          <a className="card1">
             Overview
           </a>
         </div>
       </div>
-      <div className="card">
+      <div className="card" onClick={()=>navigate('/admin_summary')}>
         <div>
           <i className="fa-solid fa-square-poll-vertical"></i> <br />
-          <a className="card1" href="/Summary">
+          <a className="card1">
             Summary
           </a>
         </div>

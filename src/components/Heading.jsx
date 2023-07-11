@@ -31,7 +31,7 @@ const Heading = () => {
     window.location.hash!=='#/login'? 
     <div id='cont'>
       <button id='logout' onClick={logout}>Logout</button>
-     {window.localStorage.getItem('auth')=='true' &&(user!==null?<div>username: {user}</div>:window.location.reload())}
+     {window.localStorage.getItem('auth')=='true' &&(user!==null?<div id='usernames'>username: {user}</div>:window.location.reload())}
     </div>
     :<></>
    }
