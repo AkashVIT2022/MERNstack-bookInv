@@ -10,8 +10,15 @@ const Alert = () => {
     const[active,setactive]=useState(0);
     const [content,setcontent]=useState(0);
     const [content1,setcontent1]=useState(0);
+    const {data}=useContext(AuthContext);
     useEffect(()=>{
-        axios.get('http://localhost:3001/publisher_shipment')
+        console.log(data.id+"hjijeig");
+        data.id && axios.get('http://localhost:3001/publisher_shipment',
+        {
+            params:{
+                id:data.id
+            }
+        })
         .then((res)=>{
             console.log(res.data);
             // settotal(count);
@@ -27,7 +34,7 @@ const Alert = () => {
         .catch((err)=>console.log(err));
         console.log(window.localStorage.getItem('active'));
         setactive(window.localStorage.getItem('active'));
-    },[])
+    },[data])
     const setview=(i)=>{
         // e.preventDefault();
         console.log(i);
@@ -118,7 +125,6 @@ const Alert = () => {
        data1 && setcontent1(data1.reduce((count, val) => val.stat=='pending'?count+1:count, 0));
        data1 &&   console.log(setcontent1(data1.reduce((count, val) => val.stat=='pending'?count+1:count, 0))+"../");
     },[data1])
-    const {data}=useContext(AuthContext);
  return (
     <>
     <center id='button'>

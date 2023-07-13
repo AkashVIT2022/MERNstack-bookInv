@@ -29,9 +29,9 @@ const Heading = ({set}) => {
     </div>
    {
     window.location.hash!=='#/dealer_login'? 
-    <div id='cont'>
+    <div className='cont'>
       <button id='logout' onClick={()=>{logout();set('dealer_login')}}>Logout</button>
-      {window.localStorage.getItem('auth')=='true' &&(user!==null?<div>username: {user}</div>:window.location.reload())}
+      {window.localStorage.getItem('auth')=='true' &&(user!==null?<div className='usernames'>username: {user}</div>:window.location.reload())}
     </div>
     :<></>
    }

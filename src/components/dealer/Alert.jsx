@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import Dealer_from from './Dealer_form';
+import { AuthContext } from '../context/AuthContext';
 const Alert = () => {
-    const [data,setdata]=useState(null);
+    const [data0,setdata]=useState(null);
     const [data1,setdata1]=useState(null);
     const [viewdata,setviewdata]=useState(null);
     const [viewdata1,setviewdata1]=useState(null);
     const[active,setactive]=useState(0);
     const [content,setcontent]=useState(0);
     const [content1,setcontent1]=useState(0);
+    const {data}=useContext(AuthContext);
+    // console.log(da/ta)
+    // const {data}=useContext
     useEffect(()=>{
         axios.get('http://localhost:3001/publisher_shipment')
         .then((res)=>{
@@ -17,7 +21,11 @@ const Alert = () => {
             setdata(res.data);
         })
         .catch((err)=>console.log(err));
-        axios.get('http://localhost:3001/dealer_request')
+        data.id && axios.get('http://localhost:3001/dealer_request',{
+            params:{
+                id:data.id
+            }
+        })
         .then((res)=>{
             console.log(res.data[0]);
             // settotal(count);
@@ -26,11 +34,11 @@ const Alert = () => {
         .catch((err)=>console.log(err));
         console.log(window.localStorage.getItem('active'));
         setactive(window.localStorage.getItem('active'));
-    },[])
+    },[data])
     const setview=(i)=>{
         // e.preventDefault();
         console.log(i);
-        setviewdata(data[i]);
+        setviewdata(data0[i]);
         document.getElementById('view').style.display='block';
         document.getElementById('alert').style.opacity='0.3';
         document.getElementById('alert').style.pointerEvents='none';
@@ -111,8 +119,8 @@ const Alert = () => {
         }
     }
     useEffect(()=>{
-       data && setcontent(data.reduce((count, val) => val.stat=='pending'?count+1:count, 0));
-    },[data])
+       data0 && setcontent(data0.reduce((count, val) => val.stat=='pending'?count+1:count, 0));
+    },[data0])
     useEffect(()=>{
        data1 && setcontent1(data1.reduce((count, val) => val.stat=='pending'?count+1:count, 0));
        data1 &&   console.log(setcontent1(data1.reduce((count, val) => val.stat=='pending'?count+1:count, 0))+"../");

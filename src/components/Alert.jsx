@@ -9,14 +9,22 @@ const Alert = () => {
     const [content,setcontent]=useState(0);
     const [content1,setcontent1]=useState(0);
     useEffect(()=>{
-        axios.get('http://localhost:3001/publisher_shipment')
+        axios.get('http://localhost:3001/publisher_shipment',{
+            params:{
+                id:''
+            }
+        })
         .then((res)=>{
             console.log(res.data);
             // settotal(count);
             setdata(res.data);
         })
         .catch((err)=>console.log(err));
-        axios.get('http://localhost:3001/dealer_request')
+        axios.get('http://localhost:3001/dealer_request',{
+            params:{
+                id:''
+            }
+        })
         .then((res)=>{
             console.log(res.data[0]);
             // settotal(count);

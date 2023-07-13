@@ -295,11 +295,11 @@
   margin-right: auto;
 }
 
-#cont {
+.cont {
   display: flex;
   justify-content: space-between;
 }
-#cont div {
+.cont div {
   color: black;
 }
 
@@ -520,12 +520,14 @@
 
 .active {
   background-color: white;
-  border: 1px solid rgba(0, 0, 0, 0.404);
+  border: 1px solid wheat;
+  box-shadow: 1px 0 3px 3px silver;
   cursor: pointer;
 }
 
 .nonactive {
   background-color: wheat;
+  box-shadow: 1px 0 3px 3px silver;
   cursor: pointer;
 }
 
@@ -1098,11 +1100,41 @@ header a {
   text-align: center;
 }
 
-#usernames {
+.usernames {
   background-color: black;
   color: white !important;
   border-radius: 5px;
   line-height: 3vh;
   padding-left: 1vw;
   padding-right: 1vw;
+}
+
+.sel {
+  background-color: white;
+  width: 10vw;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  padding: 10px;
+  border: wheat 1px solid;
+  border-bottom: none;
+}
+
+.nsel {
+  background-color: wheat;
+  width: 10vw;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  padding: 10px;
+  border: none;
+}
+
+#summary-but button {
+  border-radius: 10px;
+  box-shadow: 1px 0 3px 3px silver;
+  cursor: pointer;
+}
+
+.dark {
+  font-size: 2rem;
+  font-weight: 500;
 }/*# sourceMappingURL=style.css.map */

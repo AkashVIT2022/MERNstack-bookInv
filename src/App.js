@@ -18,6 +18,8 @@ import Inventory from './components/Inventory.js';
 import D_Inventory from './components/d_inventory.js';
 import P_Inventory from './components/p_inventory.js';
 import Summary from './components/Summary.jsx';
+import PSummary from './components/PSummary.jsx';
+import DSummary from './components/DSummary.jsx';
 import { useEffect, useState } from "react";
 function App() {
   const navigate=useNavigate();
@@ -233,14 +235,14 @@ function App() {
           exact path="/dealer_summary"
           element={<>
           <Heading set={setloginpage}/>
-          <Summary/>
+          <DSummary/>
           </>}
           ></Route>
           <Route
           exact path="/publisher_summary"
           element={<>
           <Heading set={setloginpage}/>
-          <Summary/>
+          <PSummary/>
           </>}
           ></Route>
 
