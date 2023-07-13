@@ -154,8 +154,15 @@ app.post('/update_dealer_status',async(req,res)=>{
     // console.log(result);
     if(result.stat=='accepted'){
       result.books.map((val)=>{
-        dealer_inventorys.findOneAndUpdate({name:val.name},{$inc:{quantity:+val.quantity}},{returnOriginal:false})
-        .then((response)=>console.log(response))
+        dealer_inventorys.findOneAndUpdate({name:val.name,dealer_name:result.dealer_name},{$inc:{quantity:+val.quantity}},{returnOriginal:false})
+        .then((response)=>{
+          console.log(response,'working')
+          if(response==null){
+            dealer_inventorys.insertMany({name:val.name,dealer_name:result.dealer_name,quantity:val.quantity})
+            .then((a)=>console.log(a))
+            .catch((er)=>console.log(err))
+          }
+        })
         .catch((err)=>console.log(err));
         
         admin_inventorys.findOneAndUpdate({dealer_name:id,name:val.name},{$inc:{quantity:-val.quantity},$set:{price:val.price}},{returnOriginal:false})
