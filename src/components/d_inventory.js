@@ -27,7 +27,7 @@ const Home = () => {
             <center><h1>Inventory</h1></center>
             {stocks && stocks.map(stock => (
                 <div className='deal'>
-                    <p className='dealtext'>Name:&nbsp;&nbsp; {stock.name}&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;Quantity:&nbsp;&nbsp;{stock.quantity}&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;Author:&nbsp;&nbsp;{stock.author}</p>
+                    <p className='dealtext'>Name:&nbsp;&nbsp; {stock.name}&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;Quantity:&nbsp;&nbsp;{stock.quantity}&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;</p>
                 </div>
         ))}
         </div>
